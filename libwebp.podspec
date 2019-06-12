@@ -21,23 +21,17 @@ Pod::Spec.new do |s|
   s.preserve_path = 'src'
   s.default_subspecs = 'dec', 'enc', 'demux', 'mux'
 
-  # common code, used by actual subspecs
-  s.subspec 'core' do |ss|
-    ss.source_files = 'src/utils/*.{h,c}', 'src/dsp/*.{h,c}', 'src/webp/types.h', 'src/webp/format_constants.h'
-    ss.public_header_files = 'src/webp/types.h', 'src/webp/format_constants.h'
-  end
-
   # webp decoding
   s.subspec 'dec' do |ss|
-    ss.dependency 'libwebp/core'
-    ss.source_files = 'src/dec/*.{h,c}', 'src/webp/decode.h'
-    ss.public_header_files = 'src/webp/decode.h'
+    ss.source_files = 'src/webp/decode.h', 'src/webp/types.h', 'src/webp/format_constants.h', 'src/utils/*.{h,c}', 'src/dsp/*.{h,c}', 'src/dec/*.{h,c}'
+    ss.exclude_files = 'src/dsp/cost*.{h,c}', 'src/dsp/enc*.{h,c}' # encoding only
+    ss.public_header_files = 'src/webp/decode.h', 'src/webp/types.h', 'src/webp/format_constants.h'
   end
 
   # webp encoding
   s.subspec 'enc' do |ss|
-    ss.dependency 'libwebp/core'
-    ss.source_files = 'src/enc/*.{h,c}', 'src/webp/encode.h'
+    ss.dependency 'libwebp/dec'
+    ss.source_files = 'src/enc/*.{h,c}', 'src/webp/encode.h', 'src/dsp/cost*.{h,c}',  'src/dsp/enc*.{h,c}'
     ss.public_header_files = 'src/webp/encode.h'
   end
 
