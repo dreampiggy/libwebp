@@ -23,15 +23,15 @@ Pod::Spec.new do |s|
 
   # webp decoding && encoding
   s.subspec 'webp' do |ss|
-    ss.source_files = 'src/webp/decode.h', 'src/webp/encode.h', 'src/webp/types.h', 'src/webp/format_constants.h', 'src/utils/*.{h,c}', 'src/dsp/*.{h,c}', 'src/dec/*.{h,c}', 'src/enc/*.{h,c}'
-    ss.public_header_files = 'src/webp/decode.h', 'src/webp/encode.h', 'src/webp/types.h', 'src/webp/format_constants.h'
+    ss.source_files = 'src/webp/decode.h', 'src/webp/encode.h', 'src/webp/types.h', 'src/webp/mux_types.h', 'src/webp/format_constants.h', 'src/utils/*.{h,c}', 'src/dsp/*.{h,c}', 'src/dec/*.{h,c}', 'src/enc/*.{h,c}'
+    ss.public_header_files = 'src/webp/decode.h', 'src/webp/encode.h', 'src/webp/types.h', 'src/webp/mux_types.h', 'src/webp/format_constants.h'
   end
 
   # animated webp decoding
   s.subspec 'demux' do |ss|
     ss.dependency 'libwebp/webp'
-    ss.source_files = 'src/demux/*.{h,c}', 'src/webp/demux.h', 'src/webp/mux_types.h'
-    ss.public_header_files = 'src/webp/demux.h', 'src/webp/mux_types.h'
+    ss.source_files = 'src/demux/*.{h,c}', 'src/webp/demux.h'
+    ss.public_header_files = 'src/webp/demux.h'
   end
 
   # animated webp encoding
